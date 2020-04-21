@@ -63,7 +63,7 @@ export class MapVersion extends JsonApiModel {
   width: number;
 
   @BelongsTo()
-  map: Map;
+  map: FMap;
 
   @BelongsTo()
   statistics: MapVersionStatistics;
@@ -73,7 +73,7 @@ export class MapVersion extends JsonApiModel {
 @JsonApiModelConfig({
   type: 'map'
 })
-export class Map extends JsonApiModel {
+export class FMap extends JsonApiModel {
   @Attribute()
   averageReviewScore: number;
 

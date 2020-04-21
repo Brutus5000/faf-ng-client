@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {DatastoreConfig, JsonApiDatastore, JsonApiDatastoreConfig} from 'angular2-jsonapi';
 import {HttpClient} from '@angular/common/http';
-import {Map, MapVersion, MapVersionStatistics} from './faf-api/map';
+import {FMap, MapVersion, MapVersionStatistics} from './faf-api/FMap';
 
 const config: DatastoreConfig = {
   baseUrl: 'https://api.faforever.com/data',
   models: {
-    map: Map,
+    map: FMap,
     mapVersion: MapVersion,
     mapVersionStatistics: MapVersionStatistics,
   }
