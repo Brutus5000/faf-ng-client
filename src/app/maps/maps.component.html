@@ -1,0 +1,26 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Maps</h1>
+
+  <mat-grid-list cols="3">
+    <mat-grid-tile *ngFor="let map of maps;">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{map.displayName}}
+          </mat-card-title>
+          <mat-card-subtitle>
+            {{map.latestVersion.maxPlayers}} players,
+            {{map.latestVersion.width / 51.2}}x{{map.latestVersion.height / 51.2}} km,
+            v.{{map.latestVersion.version}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <img mat-card-sm-image [src]=map.latestVersion.thumbnailUrlSmall>
+        </mat-card-content>
+        <mat-card-footer>
+          downloads: {{map.latestVersion.statistics.downloads}}
+          plays: {{map.latestVersion.statistics.plays}}
+        </mat-card-footer>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
