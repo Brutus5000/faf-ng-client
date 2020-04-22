@@ -1,7 +1,7 @@
 <div class="d-flex flex-wrap ">
   <div class="p-2 bg-gradient-warning" *ngFor="let map of maps;">
     <div class="card" style="width:256px">
-      <img class="card-img-top" [src]=map.latestVersion.thumbnailUrlLarge>
+      <img class="card-img-top" [src]=map.latestVersion.thumbnailUrlLarge alt="Map thumbnail">
       <div class="card-img-overlay">
         <h3 class="card-title">
           {{map.displayName}}
@@ -10,21 +10,21 @@
 
       </div>
       <div class="card-text bg-secondary d-inline-flex flex-wrap align-items-center">
-        <div class="p-2 bg-light">
+        <div class="p-2 bg-light" ngbTooltip="Map slots">
           <fa-icon [icon]="faUsers"></fa-icon>
           {{map.latestVersion.maxPlayers}}
         </div>
-        <div class="p-2 bg-light">
+        <div class="p-2 bg-light" ngbTooltip="Map size">
           <fa-icon [icon]="faRulerCombined"></fa-icon>
           {{map.latestVersion.width / 51.2}}x{{map.latestVersion.height / 51.2}}
         </div>
-        <div class="p-2 bg-light">
+        <div class="p-2 bg-light" ngbTooltip="Downloads">
           <a [href]="map.latestVersion.downloadUrl">
             <fa-icon [icon]="faDownload"></fa-icon>
             {{map.latestVersion.statistics.downloads}}
           </a>
         </div>
-        <div class="p-2 bg-light">
+        <div class="p-2 bg-light" ngbTooltip="Times played">
           <fa-icon [icon]="faGamepad"></fa-icon>
           {{map.latestVersion.statistics.plays}}
         </div>
