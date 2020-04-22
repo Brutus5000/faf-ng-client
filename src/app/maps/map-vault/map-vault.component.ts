@@ -9,7 +9,7 @@ import {JsonApiQueryData} from 'angular2-jsonapi';
   styleUrls: ['./map-vault.component.scss']
 })
 export class MapVaultComponent implements OnInit {
-  pageSize = 10;
+  pageSize = 25;
   currentPage = 0;
   totalElements = 0;
   filter = 'latestVersion.hidden==false';
@@ -38,7 +38,7 @@ export class MapVaultComponent implements OnInit {
 
   private queryMaps() {
     this.datastore.findAll(FMap, {
-      page: {size: this.pageSize, number: this.currentPage + 1, totals: ''},
+      page: {size: this.pageSize, number: this.currentPage, totals: ''},
       include: 'latestVersion,latestVersion.statistics',
       filter: this.filter,
     }).subscribe(
