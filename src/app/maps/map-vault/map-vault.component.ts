@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FMap} from '../../faf-api/FMap';
 import {DatastoreService} from '../../datastore.service';
 import {JsonApiQueryData} from 'angular2-jsonapi';
-import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'faf-map-vault',
@@ -10,17 +9,15 @@ import {PageEvent} from '@angular/material/paginator';
   styleUrls: ['./map-vault.component.scss']
 })
 export class MapVaultComponent implements OnInit {
-  pageSizeOptions = [10, 25, 100];
   pageSize = 10;
   currentPage = 0;
   totalElements = 0;
-  filter: string = null;
+  filter = 'latestVersion.hidden==false';
   loadedMaps: FMap[];
 
-  onPaginationChange(pageEvent: PageEvent) {
-    console.log(`pagination changes: ${JSON.stringify(pageEvent)}`);
-    this.pageSize = pageEvent.pageSize;
-    this.currentPage = pageEvent.pageIndex;
+  onPaginationChange(page: number) {
+    console.log(`pagination changes: ${page}`);
+    this.currentPage = page;
     this.queryMaps();
   }
 

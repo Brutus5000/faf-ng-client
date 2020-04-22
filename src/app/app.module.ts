@@ -6,20 +6,13 @@ import {AppComponent} from './app.component';
 import {NewsComponent} from './news/news.component';
 import {MapGridComponent} from './maps/map-grid/map-grid.component';
 import {JsonApiModule} from 'angular2-jsonapi';
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
 import {LayoutModule} from '@angular/cdk/layout';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import {MapVaultComponent} from './maps/map-vault/map-vault.component';
 import {MapSelectorComponent} from './maps/map-selector/map-selector.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -33,18 +26,11 @@ import {FormsModule} from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     JsonApiModule,
-    MatCardModule,
-    MatGridListModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
     LayoutModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatInputModule,
     FormsModule,
+    NgbModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

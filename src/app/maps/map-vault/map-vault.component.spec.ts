@@ -1,11 +1,5 @@
-impapport;
-{
-  async, ComponentFixture, TestBed;
-}
-from;
-'@angular/core/testing';
-
 import {MapVaultComponent} from './map-vault.component';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 describe('MapVaultComponent', () => {
   let component: MapVaultComponent;

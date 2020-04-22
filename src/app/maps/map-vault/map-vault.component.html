@@ -1,7 +1,14 @@
-<h1 class="mat-h1">Maps</h1>
+<h2>Maps</h2>
 
+<div class="d-flex">
+  <div class="p-2">
+    <faf-map-selector (search)="applyFilter($event)"></faf-map-selector>
+  </div>
+  <div class="p-2 ml-auto">
+    <ngb-pagination boundaryLinks="true" maxSize="10"
+                    [collectionSize]="totalElements" [page]="currentPage" [pageSize]="pageSize"
+                    (pageChange)="onPaginationChange($event)"></ngb-pagination>
+  </div>
+</div>
 
-<mat-paginator [showFirstLastButtons]="true" [length]="totalElements" [pageIndex]="currentPage" [pageSize]="pageSize"
-               [pageSizeOptions]="pageSizeOptions" (page)="onPaginationChange($event)"></mat-paginator>
-<faf-map-selector (search)="applyFilter($event)"></faf-map-selector>
 <faf-map-grid [maps]="loadedMaps"></faf-map-grid>

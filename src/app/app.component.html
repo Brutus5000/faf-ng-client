@@ -1,15 +1,31 @@
 <!-- Toolbar -->
-<mat-toolbar color="primary">
-  <img
-    width="40"
-    alt="Angular Logo"
-    src="assets/images/faf-logo.png"
-  />
-  <span>Welcome</span>
-</mat-toolbar>
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>FAForever Vault</h1>
+  <p>Find cool stuff for Forged Alliance!</p>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="#">Vault</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Maps</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Mods</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Replays</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
 <div class="content" role="main">
-  <faf-map-vault style="width: 100%"></faf-map-vault>
+  <faf-map-vault></faf-map-vault>
 </div>
 
 <router-outlet></router-outlet>

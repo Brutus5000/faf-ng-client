@@ -1,7 +1,2 @@
-<mat-form-field appearance="outline">
-  <mat-label>Map name</mat-label>
-  <input matInput placeholder="e.g. Four Hills" [(ngModel)]="mapName">
-  <mat-icon matSuffix></mat-icon>
-  <mat-hint>Use * as a wildcard.</mat-hint>
-</mat-form-field>
-<button mat-button color="primary" (click)="onSearch()">Search</button>
+<input type="text" placeholder="e.g. Four Hills" [(ngModel)]="mapName">
+<button (click)="onSearch()">Search</button>
