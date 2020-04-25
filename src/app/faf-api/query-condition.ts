@@ -3,24 +3,53 @@ export interface QueryCondition {
   buildFilterExpression: (field: string, value: string) => string;
 }
 
-const Contains: QueryCondition = {
+export const Contains: QueryCondition = {
   nameKey: 'contains',
   buildFilterExpression(field: string, value: string) {
     return `${field}==*${value}*`;
   }
 };
 
-const Is: QueryCondition = {
-  nameKey: 'is',
+export const Is: QueryCondition = {
+  nameKey: '=',
   buildFilterExpression(field: string, value: string) {
     return `${field}==${value}`;
   }
 };
+
+export const GreaterThan: QueryCondition = {
+  nameKey: '>',
+  buildFilterExpression(field: string, value: string) {
+    return `${field}=gt=${value}`;
+  }
+};
+
+export const LesserThan: QueryCondition = {
+  nameKey: '<',
+  buildFilterExpression(field: string, value: string) {
+    return `${field}=lt=${value}`;
+  }
+};
+
+export const GreaterEquals: QueryCondition = {
+  nameKey: '>=',
+  buildFilterExpression(field: string, value: string) {
+    return `${field}=ge=${value}`;
+  }
+};
+
+export const LesserEquals: QueryCondition = {
+  nameKey: '>=',
+  buildFilterExpression(field: string, value: string) {
+    return `${field}=le=${value}`;
+  }
+};
+
 
 export const StringConditions = [
   Contains, Is
 ];
 
 export const NumberConditions = [
-  Is
+  Is, GreaterThan, LesserThan, GreaterEquals, LesserEquals
 ];
