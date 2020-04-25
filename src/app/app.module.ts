@@ -13,6 +13,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {FilterCriterionComponent} from './maps/filter-criterion/filter-criterion.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     MapGridComponent,
     MapVaultComponent,
     MapSelectorComponent,
+    FilterCriterionComponent,
   ],
   imports: [
     BrowserModule,

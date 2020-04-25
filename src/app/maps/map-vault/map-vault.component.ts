@@ -10,7 +10,7 @@ import {JsonApiQueryData} from 'angular2-jsonapi';
 })
 export class MapVaultComponent implements OnInit {
   pageSize = 25;
-  currentPage = 0;
+  currentPage = 1;
   totalElements = 0;
   filter = 'latestVersion.hidden==false';
   loadedMaps: FMap[];
@@ -29,7 +29,7 @@ export class MapVaultComponent implements OnInit {
     console.log(`applying filter: ${JSON.stringify(filter)}`);
 
     this.filter = filter;
-    this.currentPage = 0;
+    this.currentPage = 1;
     this.queryMaps();
   }
 

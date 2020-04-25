@@ -1,0 +1,36 @@
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupCriteria">Criteria</label>
+  </div>
+  <select class="custom-select" id="inputGroupCriteria"
+          [(ngModel)]="criterion"
+          (ngModelChange)="onUpdate()"
+  >
+    <option *ngIf="criterion == getUnselectedCriterion()" [ngValue]="getUnselectedCriterion()">
+      Select
+    </option>
+    <option *ngFor="let c of getAvailableCriteria()" [ngValue]="c">
+      {{ c.nameKey }}
+    </option>
+  </select>
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupOperator">Operator</label>
+  </div>
+  <select class="custom-select" id="inputGroupOperator"
+          [(ngModel)]="operator"
+          (ngModelChange)="onUpdate()">
+    <option *ngIf="operator == getUnselectedOperator()" [ngValue]="getUnselectedOperator()">
+      Select
+    </option>
+    <option *ngFor="let op of getAvailableOperators()" [ngValue]="op">
+      {{ op.nameKey }}
+    </option>
+  </select>
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupValue">Value</label>
+  </div>
+  <input type="text" class="form-control" id="inputGroupValue"
+         [(ngModel)]="value"
+         (ngModelChange)="onUpdate()"
+  >
+</div>
