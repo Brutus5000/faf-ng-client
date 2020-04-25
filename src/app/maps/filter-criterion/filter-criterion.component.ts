@@ -75,6 +75,7 @@ export class FilterCriterionComponent implements OnInit {
   criterion = FilterCriterionComponent.unselectedCriterion;
   operator: QueryCondition = FilterCriterionComponent.unselectedQueryCondition;
   value: string;
+  active = true;
 
   constructor() {
   }
@@ -85,8 +86,11 @@ export class FilterCriterionComponent implements OnInit {
   onUpdate(): void {
     if (this.criterion !== FilterCriterionComponent.unselectedCriterion
       && this.operator !== FilterCriterionComponent.unselectedQueryCondition
-      && this.value) {
-      this.expressionChange.emit(this.operator.buildFilterExpression(this.criterion.apiField, this.value));
+      && this.value
+    ) {
+      this.expressionChange.emit(this.active
+        ? this.operator.buildFilterExpression(this.criterion.apiField, this.value)
+        : '');
     }
   }
 

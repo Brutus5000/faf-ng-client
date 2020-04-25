@@ -46,4 +46,7 @@
       </option>
     </select>
   </ng-template>
+  <div class="input-group-text">
+    <input type="checkbox" [(ngModel)]="active" (ngModelChange)="onUpdate()">
+  </div>
 </div>
