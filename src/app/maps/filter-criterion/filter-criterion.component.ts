@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {QueryCondition, StringConditions} from '../../faf-api/query-condition';
+import {Contains, Is, NumberConditions, QueryCondition, StringConditions} from '../../faf-api/query-condition';
 
 interface MapCriterion {
   nameKey: string;
   apiField: string;
   operators: QueryCondition[];
+  defaultOperator: QueryCondition;
   availableValues: any[];
 }
 
@@ -24,11 +25,12 @@ export class FilterCriterionComponent implements OnInit {
     nameKey: 'select',
     apiField: null,
     operators: [],
+    defaultOperator: null,
     availableValues: null,
   };
 
   static unselectedQueryCondition: QueryCondition = {
-    nameKey: 'select',
+    nameKey: '',
     buildFilterExpression(field: string, value: string) {
       return ``;
     }
@@ -36,11 +38,33 @@ export class FilterCriterionComponent implements OnInit {
 
   static availableCriteria: MapCriterion[] = [
     {
-      nameKey: 'name',
+      nameKey: 'Name',
       apiField: 'displayName',
       operators: StringConditions,
+      defaultOperator: Contains,
       availableValues: null,
-    }
+    },
+    {
+      nameKey: 'Max. Players',
+      apiField: 'latestVersion.maxPlayers',
+      operators: NumberConditions,
+      defaultOperator: Is,
+      availableValues: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    },
+    {
+      nameKey: 'Width',
+      apiField: 'latestVersion.width',
+      operators: NumberConditions,
+      defaultOperator: Is,
+      availableValues: [256, 512, 1024, 2048],
+    },
+    {
+      nameKey: 'Height',
+      apiField: 'latestVersion.height',
+      operators: NumberConditions,
+      defaultOperator: Is,
+      availableValues: [256, 512, 1024, 2048],
+    },
   ];
 
   @Input()
@@ -80,5 +104,10 @@ export class FilterCriterionComponent implements OnInit {
 
   getAvailableOperators() {
     return this.criterion.operators;
+  }
+
+  onSelectedCriterion() {
+    this.operator = this.criterion.defaultOperator;
+    this.onUpdate();
   }
 }

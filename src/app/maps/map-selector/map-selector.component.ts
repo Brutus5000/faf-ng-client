@@ -24,6 +24,7 @@ export class MapSelectorComponent implements OnInit {
   onSearch() {
     const elideFilter = 'latestVersion.hidden==false'
       + this.filterStrings
+        .filter(filterString => filterString.length > 0)
         .map(filterString => ';' + filterString)
         .join('');
     this.mapName = elideFilter;
@@ -31,15 +32,19 @@ export class MapSelectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.addCriterion();
+  }
+
+  onChangedExpression(index: number, filterString: string) {
+    this.filterStrings[index] = filterString;
+  }
+
+  addCriterion() {
     this.filters.push({
       criterion: FilterCriterionComponent.unselectedCriterion,
       operator: FilterCriterionComponent.unselectedQueryCondition,
       value: '',
     });
     this.filterStrings.push('');
-  }
-
-  onChangedExpression(index: number, filterString: string) {
-    this.filterStrings[index] = filterString;
   }
 }

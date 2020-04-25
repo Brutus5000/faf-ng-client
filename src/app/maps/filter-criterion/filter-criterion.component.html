@@ -4,7 +4,7 @@
   </div>
   <select class="custom-select" id="inputGroupCriteria"
           [(ngModel)]="criterion"
-          (ngModelChange)="onUpdate()"
+          (ngModelChange)="onSelectedCriterion()"
   >
     <option *ngIf="criterion == getUnselectedCriterion()" [ngValue]="getUnselectedCriterion()">
       Select
@@ -20,17 +20,30 @@
           [(ngModel)]="operator"
           (ngModelChange)="onUpdate()">
     <option *ngIf="operator == getUnselectedOperator()" [ngValue]="getUnselectedOperator()">
-      Select
     </option>
     <option *ngFor="let op of getAvailableOperators()" [ngValue]="op">
       {{ op.nameKey }}
     </option>
   </select>
-  <div class="input-group-prepend">
-    <label class="input-group-text" for="inputGroupValue">Value</label>
-  </div>
-  <input type="text" class="form-control" id="inputGroupValue"
-         [(ngModel)]="value"
-         (ngModelChange)="onUpdate()"
-  >
+  <ng-container *ngIf="criterion.availableValues === null; else preSelection">
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupValue">Value</label>
+    </div>
+    <input type="text" class="form-control" id="inputGroupValue"
+           [(ngModel)]="value"
+           (ngModelChange)="onUpdate()"
+    >
+  </ng-container>
+  <ng-template #preSelection>
+    <div class="input-group-prepend">
+      <label class="input-group-text" for="inputGroupPreselectedValue">Value</label>
+    </div>
+    <select class="custom-select" id="inputGroupPreselectedValue"
+            [(ngModel)]="value"
+            (ngModelChange)="onUpdate()">
+      <option *ngFor="let entry of criterion.availableValues" [ngValue]="entry">
+        {{entry}}
+      </option>
+    </select>
+  </ng-template>
 </div>
