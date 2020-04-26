@@ -1,14 +1,9 @@
 <h2>Maps</h2>
 
-<div class="d-flex">
-  <div class="p-2">
-    <faf-map-selector (search)="applyFilter($event)"></faf-map-selector>
-  </div>
-  <div class="p-2 ml-auto">
-    <ngb-pagination boundaryLinks="true" maxSize="10"
-                    [collectionSize]="totalElements" [page]="currentPage" [pageSize]="pageSize"
-                    (pageChange)="onPaginationChange($event)"></ngb-pagination>
-  </div>
-</div>
+<ngb-pagination boundaryLinks="true" maxSize="10"
+                [collectionSize]="totalElements" [page]="currentPage" [pageSize]="pageSize"
+                (pageChange)="onPaginationChange($event)"></ngb-pagination>
+
+<faf-map-selector (search)="applyFilter($event)"></faf-map-selector>
 
 <faf-map-grid [maps]="loadedMaps"></faf-map-grid>

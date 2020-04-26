@@ -39,6 +39,11 @@ export class MapSelectorComponent implements OnInit {
     this.filterStrings[index] = filterString;
   }
 
+  onRemove(index: number) {
+    this.filters.splice(index, 1);
+    this.filterStrings.splice(index, 1);
+  }
+
   addCriterion() {
     this.filters.push({
       criterion: FilterCriterionComponent.unselectedCriterion,

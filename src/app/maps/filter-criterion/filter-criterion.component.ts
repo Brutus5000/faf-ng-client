@@ -71,6 +71,8 @@ export class FilterCriterionComponent implements OnInit {
   index: number;
   @Output()
   expressionChange = new EventEmitter<string>();
+  @Output()
+  remove = new EventEmitter();
 
   criterion = FilterCriterionComponent.unselectedCriterion;
   operator: QueryCondition = FilterCriterionComponent.unselectedQueryCondition;
@@ -113,5 +115,9 @@ export class FilterCriterionComponent implements OnInit {
   onSelectedCriterion() {
     this.operator = this.criterion.defaultOperator;
     this.onUpdate();
+  }
+
+  onRemove() {
+    this.remove.emit();
   }
 }

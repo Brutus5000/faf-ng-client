@@ -1,6 +1,7 @@
 <faf-filter-criterion *ngFor="let filter of filters; let i = index"
                       [index]="i"
-                      (expressionChange)="onChangedExpression(i, $event)">
+                      (expressionChange)="onChangedExpression(i, $event)"
+                      (remove)="onRemove(i)">
 </faf-filter-criterion>
 
 <p *ngIf="showQuery">
@@ -8,7 +9,7 @@
          style="width: 30em">
 </p>
 <div>
-  <button class="btn btn-primary" (click)="addCriterion()">Add criterion</button>
+  <button class="btn btn-outline-primary" (click)="addCriterion()">Add criterion</button>
   <button class="btn btn-primary" (click)="onSearch()">Search</button>
   <span class="custom-switch" style="margin-left: 1em">
   <input type="checkbox" class="custom-control-input" id="advancedFilteringOff" [(ngModel)]="showQuery">
