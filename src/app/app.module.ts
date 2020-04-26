@@ -14,6 +14,7 @@ import {FormsModule} from '@angular/forms';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FilterCriterionComponent} from './maps/filter-criterion/filter-criterion.component';
+import {SortCriterionComponent} from './maps/sort-criterion-component/sort-criterion.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {FilterCriterionComponent} from './maps/filter-criterion/filter-criterion
     MapVaultComponent,
     MapSelectorComponent,
     FilterCriterionComponent,
+    SortCriterionComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Output} from '@angular/core';
 import {FilterCriterionComponent, MapFilter} from '../filter-criterion/filter-criterion.component';
 
 @Component({
@@ -6,14 +6,12 @@ import {FilterCriterionComponent, MapFilter} from '../filter-criterion/filter-cr
   templateUrl: './map-selector.component.html',
   styleUrls: ['./map-selector.component.scss']
 })
-export class MapSelectorComponent implements OnInit {
+export class MapSelectorComponent implements AfterViewInit {
   filters: MapFilter[] = [];
   filterStrings: string[] = [];
-
+  sortingString = null;
   showQuery = false;
   mapName: string = null;
-  orderBy: string;
-  orderByDirection: string;
 
   @Output()
   search = new EventEmitter();
@@ -28,15 +26,20 @@ export class MapSelectorComponent implements OnInit {
         .map(filterString => ';' + filterString)
         .join('');
     this.mapName = elideFilter;
-    this.search.emit(elideFilter);
+    this.search.emit({filter: elideFilter, sorting: this.sortingString});
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.addCriterion();
+    this.onSearch();
   }
 
-  onChangedExpression(index: number, filterString: string) {
+  onFilterChange(index: number, filterString: string) {
     this.filterStrings[index] = filterString;
+  }
+
+  onSortingChange(sortingString: string) {
+    this.sortingString = sortingString;
   }
 
   onRemove(index: number) {

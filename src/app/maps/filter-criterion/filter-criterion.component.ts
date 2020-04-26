@@ -1,16 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Contains, Is, NumberConditions, QueryCondition, StringConditions} from '../../faf-api/query-condition';
-
-interface MapCriterion {
-  nameKey: string;
-  apiField: string;
-  operators: QueryCondition[];
-  defaultOperator: QueryCondition;
-  availableValues: any[];
-}
+import {FilterCriterion} from '../../faf-api/filter-criterion';
 
 export interface MapFilter {
-  criterion: MapCriterion;
+  criterion: FilterCriterion;
   operator: QueryCondition;
   value: string;
 }
@@ -21,7 +14,7 @@ export interface MapFilter {
   styleUrls: ['./filter-criterion.component.scss']
 })
 export class FilterCriterionComponent implements OnInit {
-  static unselectedCriterion: MapCriterion = {
+  static unselectedCriterion: FilterCriterion = {
     nameKey: 'select',
     apiField: null,
     operators: [],
@@ -36,7 +29,7 @@ export class FilterCriterionComponent implements OnInit {
     }
   };
 
-  static availableCriteria: MapCriterion[] = [
+  static availableCriteria: FilterCriterion[] = [
     {
       nameKey: 'Name',
       apiField: 'displayName',

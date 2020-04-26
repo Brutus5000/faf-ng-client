@@ -1,8 +1,9 @@
 <faf-filter-criterion *ngFor="let filter of filters; let i = index"
                       [index]="i"
-                      (expressionChange)="onChangedExpression(i, $event)"
+                      (expressionChange)="onFilterChange(i, $event)"
                       (remove)="onRemove(i)">
 </faf-filter-criterion>
+<faf-sort-criterion-component (expressionChange)="onSortingChange($event)"></faf-sort-criterion-component>
 
 <p *ngIf="showQuery">
   <input type="text" class="input-group-text" disabled [(ngModel)]="mapName"

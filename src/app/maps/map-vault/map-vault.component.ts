@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FMap} from '../../faf-api/FMap';
 import {DatastoreService} from '../../datastore.service';
 import {JsonApiQueryData} from 'angular2-jsonapi';
@@ -8,11 +8,12 @@ import {JsonApiQueryData} from 'angular2-jsonapi';
   templateUrl: './map-vault.component.html',
   styleUrls: ['./map-vault.component.scss']
 })
-export class MapVaultComponent implements OnInit {
+export class MapVaultComponent {
   pageSize = 25;
   currentPage = 1;
   totalElements = 0;
   filter = 'latestVersion.hidden==false';
+  sorting = null;
   loadedMaps: FMap[];
 
   onPaginationChange(page: number) {
@@ -25,15 +26,13 @@ export class MapVaultComponent implements OnInit {
     console.log('loading MapsComponent');
   }
 
-  applyFilter(filter: string) {
-    console.log(`applying filter: ${JSON.stringify(filter)}`);
+  applyFilter(result: any) {
+    console.log(`applying filter: ${JSON.stringify(result)}`);
 
-    this.filter = filter;
+    this.filter = result.filter;
+    this.sorting = result.sorting;
     this.currentPage = 1;
     this.queryMaps();
-  }
-
-  ngOnInit(): void {
   }
 
   private queryMaps() {
@@ -41,6 +40,7 @@ export class MapVaultComponent implements OnInit {
       page: {size: this.pageSize, number: this.currentPage, totals: ''},
       include: 'latestVersion,latestVersion.statistics',
       filter: this.filter,
+      sort: this.sorting,
     }).subscribe(
       (maps: JsonApiQueryData<FMap>) => {
         this.loadedMaps = maps.getModels();

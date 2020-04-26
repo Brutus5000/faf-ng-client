@@ -1,0 +1,20 @@
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSortBy">Sort by</label>
+  </div>
+  <select class="custom-select" id="inputGroupSortBy"
+          [(ngModel)]="criterion"
+          (ngModelChange)="onUpdate()">
+    <option *ngFor="let entry of sortCriteria" [ngValue]="entry">
+      {{entry.nameKey}}
+    </option>
+  </select>
+  <div class="btn-group btn-group-toggle" ngbRadioGroup name="sortOrder" [(ngModel)]="direction">
+    <label ngbButtonLabel class="btn-outline-primary">
+      <input ngbButton type="radio" [value]="SortOrder.ASCENDING" (change)="onUpdate()">ASC
+    </label>
+    <label ngbButtonLabel class="btn-outline-primary">
+      <input ngbButton type="radio" [value]="SortOrder.DESCENDING" (change)="onUpdate()">DESC
+    </label>
+  </div>
+</div>
