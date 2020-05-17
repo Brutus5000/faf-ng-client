@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Output} from '@angular/core';
-import {FilterCriterionComponent, MapFilter} from '../filter-criterion/filter-criterion.component';
+import {MapFilter} from '../filter-criterion/filter-criterion.component';
 
 @Component({
   selector: 'faf-map-selector',
@@ -49,9 +49,9 @@ export class MapSelectorComponent implements AfterViewInit {
 
   addCriterion() {
     this.filters.push({
-      criterion: FilterCriterionComponent.unselectedCriterion,
-      operator: FilterCriterionComponent.unselectedQueryCondition,
-      value: '',
+      criterion: null,
+      operator: null,
+      value: null,
     });
     this.filterStrings.push('');
   }

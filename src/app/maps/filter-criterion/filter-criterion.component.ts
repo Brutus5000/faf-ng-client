@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Contains, Is, NumberConditions, QueryCondition, StringConditions} from '../../faf-api/query-condition';
 import {FilterCriterion} from '../../faf-api/filter-criterion';
+import {SelectItem} from 'primeng/api';
 
 export interface MapFilter {
   criterion: FilterCriterion;
@@ -14,21 +15,6 @@ export interface MapFilter {
   styleUrls: ['./filter-criterion.component.scss']
 })
 export class FilterCriterionComponent implements OnInit {
-  static unselectedCriterion: FilterCriterion = {
-    nameKey: 'select',
-    apiField: null,
-    operators: [],
-    defaultOperator: null,
-    availableValues: null,
-  };
-
-  static unselectedQueryCondition: QueryCondition = {
-    nameKey: '',
-    buildFilterExpression(field: string, value: string) {
-      return ``;
-    }
-  };
-
   static availableCriteria: FilterCriterion[] = [
     {
       nameKey: 'Name',
@@ -67,9 +53,9 @@ export class FilterCriterionComponent implements OnInit {
   @Output()
   remove = new EventEmitter();
 
-  criterion = FilterCriterionComponent.unselectedCriterion;
-  operator: QueryCondition = FilterCriterionComponent.unselectedQueryCondition;
-  value: string;
+  criterion?: FilterCriterion;
+  operator?: QueryCondition;
+  value?: string;
   active = true;
 
   constructor() {
@@ -79,9 +65,7 @@ export class FilterCriterionComponent implements OnInit {
   }
 
   onUpdate(): void {
-    if (this.criterion !== FilterCriterionComponent.unselectedCriterion
-      && this.operator !== FilterCriterionComponent.unselectedQueryCondition
-      && this.value
+    if (this.criterion && this.operator && this.value
     ) {
       this.expressionChange.emit(this.active
         ? this.operator.buildFilterExpression(this.criterion.apiField, this.value)
@@ -89,20 +73,22 @@ export class FilterCriterionComponent implements OnInit {
     }
   }
 
-  getUnselectedCriterion() {
-    return FilterCriterionComponent.unselectedCriterion;
-  }
-
-  getUnselectedOperator() {
-    return FilterCriterionComponent.unselectedQueryCondition;
-  }
-
   getAvailableCriteria() {
     return FilterCriterionComponent.availableCriteria;
   }
 
   getAvailableOperators() {
-    return this.criterion.operators;
+    return this.criterion?.operators;
+  }
+
+  getAvailableValues(): SelectItem[] {
+    return (this.criterion?.availableValues ?? []).map(v => {
+        return {
+          label: v.toString(),
+          value: v
+        };
+      }
+    );
   }
 
   onSelectedCriterion() {
