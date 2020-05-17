@@ -27,6 +27,8 @@
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
     "angular2-jsonapi": "^8.2.1",
     "bootstrap": "^4.4.1",
+    "primeicons": "^3.0.0-rc.1",
+    "primeng": "^9.0.6",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

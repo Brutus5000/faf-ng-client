@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FMap} from '../../faf-api/FMap';
 import {DatastoreService} from '../../datastore.service';
 import {JsonApiQueryData} from 'angular2-jsonapi';
+import {PageChangeEvent} from '../../primeng/primeng-event-definitions';
 
 @Component({
   selector: 'faf-map-vault',
@@ -16,9 +17,9 @@ export class MapVaultComponent {
   sorting = null;
   loadedMaps: FMap[];
 
-  onPaginationChange(page: number) {
-    console.log(`pagination changes: ${page}`);
-    this.currentPage = page;
+  onPaginationChange(event: PageChangeEvent) {
+    console.log(`pagination changes: ${event}`);
+    this.currentPage = event.page + 1;
     this.queryMaps();
   }
 

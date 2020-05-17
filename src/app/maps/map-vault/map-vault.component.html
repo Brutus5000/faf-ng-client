@@ -1,8 +1,7 @@
 <h2>Maps</h2>
 
-<ngb-pagination boundaryLinks="true" maxSize="10" rotate="true"
-                [collectionSize]="totalElements" [page]="currentPage" [pageSize]="pageSize"
-                (pageChange)="onPaginationChange($event)"></ngb-pagination>
+<p-paginator pageLinkSize="10" [totalRecords]="totalElements" [rows]="pageSize"
+             (onPageChange)="onPaginationChange($event)"></p-paginator>
 
 <faf-map-selector (search)="applyFilter($event)"></faf-map-selector>
 

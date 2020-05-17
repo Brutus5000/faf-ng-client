@@ -15,6 +15,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FilterCriterionComponent} from './maps/filter-criterion/filter-criterion.component';
 import {SortCriterionComponent} from './maps/sort-criterion-component/sort-criterion.component';
+import {PaginatorModule} from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {SortCriterionComponent} from './maps/sort-criterion-component/sort-crite
     FormsModule,
     NgbModule,
     FontAwesomeModule,
+    PaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
