@@ -1,13 +1,11 @@
-<p-dropdown [options]="getAvailableCriteria()" [(ngModel)]="criterion" (ngModelChange)="onSelectedCriterion()"
-            optionLabel="nameKey" placeholder="Select a criterion"></p-dropdown>
-<p-dropdown [options]="getAvailableOperators()" [(ngModel)]="operator" (ngModelChange)="onUpdate()"
-            optionLabel="nameKey" placeholder="Select an operator"></p-dropdown>
-<p-dropdown [options]="getAvailableValues()" [(ngModel)]="value" (ngModelChange)="onUpdate()"
-            placeholder="Your search value" [editable]="getAvailableValues().length == 0"></p-dropdown>
-<div class="ui-g ui-fluid">
-
-  <div class="input-group-text">
-    <input type="checkbox" [(ngModel)]="active" (ngModelChange)="onUpdate()">
-  </div>
-  <button pButton class="btn btn-outline-danger" (click)="onRemove()">Remove</button>
+<div class="ui-inputgroup">
+  <span class="ui-inputgroup-addon"><i class="pi pi-filter"></i></span>
+  <p-dropdown [options]="getAvailableCriteria()" [(ngModel)]="criterion" (ngModelChange)="onSelectedCriterion()"
+              optionLabel="nameKey" placeholder="Select a criterion"></p-dropdown>
+  <p-dropdown [options]="getAvailableOperators()" [(ngModel)]="operator" (ngModelChange)="onUpdate()"
+              optionLabel="nameKey" placeholder="Select an operator"></p-dropdown>
+  <p-dropdown [options]="getAvailableValues()" [(ngModel)]="value" (ngModelChange)="onUpdate()"
+              placeholder="Your search value" [editable]="getAvailableValues().length == 0"></p-dropdown>
+  <p-checkbox [(ngModel)]="active" (ngModelChange)="onUpdate()"></p-checkbox>
+  <button pButton class="ui-button-warning" icon="pi pi-trash" (click)="onRemove()"></button>
 </div>

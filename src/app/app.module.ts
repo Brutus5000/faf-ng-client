@@ -11,13 +11,16 @@ import {MapVaultComponent} from './maps/map-vault/map-vault.component';
 import {MapSelectorComponent} from './maps/map-selector/map-selector.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FilterCriterionComponent} from './maps/filter-criterion/filter-criterion.component';
 import {SortCriterionComponent} from './maps/sort-criterion-component/sort-criterion.component';
 import {PaginatorModule} from 'primeng/paginator';
 import {ButtonModule} from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
+import {SelectButtonModule} from 'primeng/selectbutton';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {InputTextModule} from 'primeng/inputtext';
+import {CheckboxModule} from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -36,11 +39,14 @@ import {DropdownModule} from 'primeng/dropdown';
     LayoutModule,
     BrowserAnimationsModule,
     FormsModule,
-    NgbModule,
     FontAwesomeModule,
     PaginatorModule,
     ButtonModule,
-    DropdownModule
+    DropdownModule,
+    SelectButtonModule,
+    InputSwitchModule,
+    InputTextModule,
+    CheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

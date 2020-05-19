@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Contains, Is, NumberConditions, QueryCondition, StringConditions} from '../../faf-api/query-condition';
 import {FilterCriterion} from '../../faf-api/filter-criterion';
 import {SelectItem} from 'primeng/api';
@@ -14,7 +14,7 @@ export interface MapFilter {
   templateUrl: './filter-criterion.component.html',
   styleUrls: ['./filter-criterion.component.scss']
 })
-export class FilterCriterionComponent implements OnInit {
+export class FilterCriterionComponent {
   static availableCriteria: FilterCriterion[] = [
     {
       nameKey: 'Name',
@@ -57,12 +57,6 @@ export class FilterCriterionComponent implements OnInit {
   operator?: QueryCondition;
   value?: string;
   active = true;
-
-  constructor() {
-  }
-
-  ngOnInit(): void {
-  }
 
   onUpdate(): void {
     if (this.criterion && this.operator && this.value

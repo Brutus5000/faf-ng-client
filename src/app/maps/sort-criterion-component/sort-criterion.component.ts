@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {buildSortExpression, SortCriterion, SortOrder} from '../../faf-api/sort-criterion';
+import {SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'faf-sort-criterion-component',
@@ -31,6 +32,17 @@ export class SortCriterionComponent implements OnInit {
     },
   ];
 
+  directions: SelectItem[] = [
+    {
+      label: 'DESC',
+      value: SortOrder.DESCENDING
+    },
+    {
+      label: 'ASC',
+      value: SortOrder.ASCENDING
+    }
+  ];
+
   criterion: SortCriterion = this.sortCriteria[2];
   direction = SortOrder.DESCENDING;
 
@@ -45,5 +57,6 @@ export class SortCriterionComponent implements OnInit {
     const expression = buildSortExpression(this.criterion, this.direction);
     this.expressionChange.emit(expression);
   }
+
 
 }

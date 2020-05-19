@@ -1,8 +1,11 @@
 <h2>Maps</h2>
 
+<faf-map-selector (search)="applyFilter($event)"></faf-map-selector>
+
 <p-paginator pageLinkSize="10" [totalRecords]="totalElements" [rows]="pageSize"
              (onPageChange)="onPaginationChange($event)"></p-paginator>
 
-<faf-map-selector (search)="applyFilter($event)"></faf-map-selector>
-
 <faf-map-grid [maps]="loadedMaps"></faf-map-grid>
+
+<p-paginator pageLinkSize="10" [totalRecords]="totalElements" [rows]="pageSize"
+             (onPageChange)="onPaginationChange($event)"></p-paginator>

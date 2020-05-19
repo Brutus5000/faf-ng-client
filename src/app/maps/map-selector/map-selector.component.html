@@ -6,14 +6,12 @@
 <faf-sort-criterion-component (expressionChange)="onSortingChange($event)"></faf-sort-criterion-component>
 
 <p *ngIf="showQuery">
-  <input type="text" class="input-group-text" disabled [(ngModel)]="mapName"
+  <input type="text" pInputText disabled [(ngModel)]="mapName"
          style="width: 30em">
 </p>
 <div>
-  <button class="btn btn-outline-primary" (click)="addCriterion()">Add criterion</button>
-  <button class="btn btn-primary" (click)="onSearch()">Search</button>
-  <span class="custom-switch" style="margin-left: 1em">
-  <input type="checkbox" class="custom-control-input" id="advancedFilteringOff" [(ngModel)]="showQuery">
-  <label class="custom-control-label" for="advancedFilteringOff">Show query string</label>
-</span>
+  <button pButton class="ui-button-secondary" icon="pi pi-plus" (click)="addCriterion()" label="Add criterion"></button>
+  <button pButton icon="pi pi-search" (click)="onSearch()" label="Search"></button>
+  <p-inputSwitch [(ngModel)]="showQuery" id="advancedFilteringOff"></p-inputSwitch>
+  Show query string
 </div>
