@@ -1,12 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Contains, Is, NumberConditions, QueryCondition, StringConditions} from '../../faf-api/query-condition';
+import {QueryCondition} from '../../faf-api/query-condition';
 import {FilterCriterion} from '../../faf-api/filter-criterion';
-
-export interface MapFilter {
-  criterion: FilterCriterion;
-  operator: QueryCondition;
-  value: string;
-}
+import {MapFilterCriteria} from '../../faf-api/map.service';
 
 @Component({
   selector: 'faf-filter-criterion',
@@ -30,34 +25,10 @@ export class FilterCriterionComponent implements OnInit {
   };
 
   static availableCriteria: FilterCriterion[] = [
-    {
-      nameKey: 'Name',
-      apiField: 'displayName',
-      operators: StringConditions,
-      defaultOperator: Contains,
-      availableValues: null,
-    },
-    {
-      nameKey: 'Max. Players',
-      apiField: 'latestVersion.maxPlayers',
-      operators: NumberConditions,
-      defaultOperator: Is,
-      availableValues: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-    },
-    {
-      nameKey: 'Width',
-      apiField: 'latestVersion.width',
-      operators: NumberConditions,
-      defaultOperator: Is,
-      availableValues: [256, 512, 1024, 2048],
-    },
-    {
-      nameKey: 'Height',
-      apiField: 'latestVersion.height',
-      operators: NumberConditions,
-      defaultOperator: Is,
-      availableValues: [256, 512, 1024, 2048],
-    },
+    MapFilterCriteria.NAME,
+    MapFilterCriteria.MAX_PLAYERS,
+    MapFilterCriteria.WIDTH,
+    MapFilterCriteria.HEIGHT,
   ];
 
   @Input()

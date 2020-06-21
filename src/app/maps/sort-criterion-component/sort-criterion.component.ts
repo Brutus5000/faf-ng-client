@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {buildSortExpression, SortCriterion, SortOrder} from '../../faf-api/sort-criterion';
+import {SortCriterion, SortOrder, SortSelection} from '../../faf-api/sort-criterion';
+import {MapSortCriteria} from '../../faf-api/map.service';
 
 @Component({
   selector: 'faf-sort-criterion-component',
@@ -10,28 +11,11 @@ export class SortCriterionComponent implements OnInit {
   SortOrder = SortOrder;
 
   @Output()
-  expressionChange = new EventEmitter<string>();
+  sortSelectionChange = new EventEmitter<SortSelection>();
 
-  sortCriteria: SortCriterion[] = [
-    {
-      nameKey: 'Name',
-      apiField: 'displayName'
-    },
-    {
-      nameKey: 'Downloads',
-      apiField: 'latestVersion.statistics.downloads'
-    },
-    {
-      nameKey: 'Games played',
-      apiField: 'latestVersion.statistics.plays'
-    },
-    {
-      nameKey: 'Last update',
-      apiField: 'latestVersion.updateTime'
-    },
-  ];
+  sortCriteria: SortCriterion[] = MapSortCriteria.ALL;
 
-  criterion: SortCriterion = this.sortCriteria[2];
+  criterion: SortCriterion = MapSortCriteria.DOWNLOADS;
   direction = SortOrder.DESCENDING;
 
   constructor() {
@@ -42,8 +26,10 @@ export class SortCriterionComponent implements OnInit {
   }
 
   onUpdate(): void {
-    const expression = buildSortExpression(this.criterion, this.direction);
-    this.expressionChange.emit(expression);
+    this.sortSelectionChange.emit({
+      criterion: this.criterion,
+      direction: this.direction
+    });
   }
 
 }

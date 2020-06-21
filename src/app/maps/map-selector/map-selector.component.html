@@ -3,7 +3,7 @@
                       (expressionChange)="onFilterChange(i, $event)"
                       (remove)="onRemove(i)">
 </faf-filter-criterion>
-<faf-sort-criterion-component (expressionChange)="onSortingChange($event)"></faf-sort-criterion-component>
+<faf-sort-criterion-component (sortSelectionChange)="onSortingChange($event)"></faf-sort-criterion-component>
 
 <p *ngIf="showQuery">
   <input type="text" class="input-group-text" disabled [(ngModel)]="mapName"

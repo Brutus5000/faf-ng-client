@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, Output} from '@angular/core';
-import {FilterCriterionComponent, MapFilter} from '../filter-criterion/filter-criterion.component';
+import {FilterCriterionComponent} from '../filter-criterion/filter-criterion.component';
+import {buildSortExpression, SortSelection} from '../../faf-api/sort-criterion';
+import {FilterSelection} from '../../faf-api/filter-criterion';
 
 @Component({
   selector: 'faf-map-selector',
@@ -7,7 +9,7 @@ import {FilterCriterionComponent, MapFilter} from '../filter-criterion/filter-cr
   styleUrls: ['./map-selector.component.scss']
 })
 export class MapSelectorComponent implements AfterViewInit {
-  filters: MapFilter[] = [];
+  filters: FilterSelection[] = [];
   filterStrings: string[] = [];
   sortingString = null;
   showQuery = false;
@@ -38,8 +40,8 @@ export class MapSelectorComponent implements AfterViewInit {
     this.filterStrings[index] = filterString;
   }
 
-  onSortingChange(sortingString: string) {
-    this.sortingString = sortingString;
+  onSortingChange(sortSelection: SortSelection) {
+    this.sortingString = buildSortExpression(sortSelection);
   }
 
   onRemove(index: number) {
