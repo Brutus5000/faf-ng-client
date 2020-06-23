@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DatastoreService} from '../datastore.service';
 import {FafMap} from './FafMap';
-import {FilterSelection} from './filter-criterion';
+import {buildFilterExpression, FilterSelection} from './filter-criterion';
 import {buildSortExpression, SortSelection} from './sort-criterion';
 import {Observable} from 'rxjs';
 import {JsonApiQueryData} from 'angular2-jsonapi/models/json-api-query-data';
@@ -107,7 +107,7 @@ export class MapService {
     return this.datastore.findAll(FafMap, {
       page: {size: pageSize, number: currentPage, totals: ''},
       include,
-      filter: filters,
+      filter: buildFilterExpression(filters),
       sort: buildSortExpression(sorting),
     });
   }

@@ -13,7 +13,7 @@ export class MapSelectorComponent implements AfterViewInit {
   filterStrings: string[] = [];
   sortingString = null;
   showQuery = false;
-  mapName: string = null;
+  queryString: string = null;
 
   @Output()
   search = new EventEmitter();
@@ -27,7 +27,7 @@ export class MapSelectorComponent implements AfterViewInit {
         .filter(filterString => filterString.length > 0)
         .map(filterString => ';' + filterString)
         .join('');
-    this.mapName = elideFilter;
+    this.queryString = elideFilter;
     this.search.emit({filter: elideFilter, sorting: this.sortingString});
   }
 
