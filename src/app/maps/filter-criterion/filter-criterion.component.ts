@@ -1,7 +1,12 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {QueryCondition} from '../../faf-api/query-condition';
-import {FilterItem, FilterTypes} from '../../faf-api/filter-types';
-import {SelectItem} from 'primeng/api';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Contains, Is, NumberConditions, QueryCondition, StringConditions} from '../../faf-api/query-condition';
+import {FilterCriterion} from '../../faf-api/filter-criterion';
+
+export interface MapFilter {
+  criterion: FilterCriterion;
+  operator: QueryCondition;
+  value: string;
+}
 
 @Component({
   selector: 'faf-filter-criterion',
@@ -14,11 +19,11 @@ export class FilterCriterionComponent {
   @Input()
   index: number;
   @Output()
-  expressionChange = new EventEmitter<FilterItem>();
+  expressionChange = new EventEmitter<string>();
   @Output()
   remove = new EventEmitter();
 
-  selectedCriterion?: FilterTypes;
+  selectedCriterion?: FilterCriterion;
   selectedOperator?: QueryCondition;
   value?: string;
   active = true;

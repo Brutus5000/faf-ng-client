@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FMap} from '../../faf-api/FMap';
+import {FafMap} from '../../faf-api/FafMap';
 import {DatastoreService} from '../../datastore.service';
 import {JsonApiQueryData} from 'angular2-jsonapi';
 import {PageChangeEvent} from '../../primeng/primeng-event-definitions';
@@ -15,7 +15,7 @@ export class MapVaultComponent {
   totalElements = 0;
   filter = 'latestVersion.hidden==false';
   sorting = null;
-  loadedMaps: FMap[];
+  loadedMaps: FafMap[];
 
   onPaginationChange(event: PageChangeEvent) {
     console.log(`pagination changes: ${event}`);
@@ -37,13 +37,13 @@ export class MapVaultComponent {
   }
 
   private queryMaps() {
-    this.datastore.findAll(FMap, {
+    this.datastore.findAll(FafMap, {
       page: {size: this.pageSize, number: this.currentPage, totals: ''},
       include: 'latestVersion,latestVersion.statistics',
       filter: this.filter,
       sort: this.sorting,
     }).subscribe(
-      (maps: JsonApiQueryData<FMap>) => {
+      (maps: JsonApiQueryData<FafMap>) => {
         this.loadedMaps = maps.getModels();
         this.totalElements = maps.getMeta().meta.page.totalRecords;
         console.log('read the maps');

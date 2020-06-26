@@ -45,6 +45,7 @@ export const LesserEquals: QueryCondition = {
   }
 };
 
+export const BooleanCondition = [ Is ];
 
 export const StringConditions = [
   Contains, Is

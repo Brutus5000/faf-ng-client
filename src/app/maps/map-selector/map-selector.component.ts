@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, Output} from '@angular/core';
-import {FilterItem, FilterTypes} from '../../faf-api/filter-types';
-import {Contains, Is, NumberConditions, StringConditions} from '../../faf-api/query-condition';
+import {FilterCriterionComponent} from '../filter-criterion/filter-criterion.component';
+import {buildSortExpression, SortSelection} from '../../faf-api/sort-criterion';
+import {FilterSelection} from '../../faf-api/filter-criterion';
 
 @Component({
   selector: 'faf-map-selector',
@@ -8,43 +9,10 @@ import {Contains, Is, NumberConditions, StringConditions} from '../../faf-api/qu
   styleUrls: ['./map-selector.component.scss']
 })
 export class MapSelectorComponent implements AfterViewInit {
-  availableCriteria: FilterTypes[] = [
-    {
-      nameKey: 'Name',
-      apiField: 'displayName',
-      operators: StringConditions,
-      defaultOperator: Contains,
-      availableValues: null,
-    },
-    {
-      nameKey: 'Max. Players',
-      apiField: 'latestVersion.maxPlayers',
-      operators: NumberConditions,
-      defaultOperator: Is,
-      availableValues: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-    },
-    {
-      nameKey: 'Width',
-      apiField: 'latestVersion.width',
-      operators: NumberConditions,
-      defaultOperator: Is,
-      availableValues: [256, 512, 1024, 2048],
-    },
-    {
-      nameKey: 'Height',
-      apiField: 'latestVersion.height',
-      operators: NumberConditions,
-      defaultOperator: Is,
-      availableValues: [256, 512, 1024, 2048],
-    },
-  ];
-
-
-  filters: FilterItem[] = [];
-  filterItems: FilterItem[] = [];
+  filters: FilterSelection[] = [];
   sortingString = null;
   showQuery = false;
-  mapName: string = null;
+  queryString: string = null;
 
   @Output()
   search = new EventEmitter();
@@ -65,8 +33,7 @@ export class MapSelectorComponent implements AfterViewInit {
         .filter(filterString => filterString.length > 0)
         .map(filterString => ';' + filterString)
         .join('');
-
-    this.mapName = elideFilter;
+    this.queryString = elideFilter;
     this.search.emit({filter: elideFilter, sorting: this.sortingString});
   }
 
@@ -75,17 +42,16 @@ export class MapSelectorComponent implements AfterViewInit {
     this.onSearch();
   }
 
-  onFilterChange(index: number, filterItem: FilterItem) {
+  onFilterChange(index: number, filterItem: FilterSelection) {
     this.filterItems[index] = filterItem;
   }
 
-  onSortingChange(sortingString: string) {
-    this.sortingString = sortingString;
+  onSortingChange(sortSelection: SortSelection) {
+    this.sortingString = buildSortExpression(sortSelection);
   }
 
   onRemove(index: number) {
     this.filters.splice(index, 1);
-    this.filterItems.splice(index, 1);
   }
 
   addCriterion() {
@@ -94,7 +60,7 @@ export class MapSelectorComponent implements AfterViewInit {
       operator: null,
       value: null,
     });
-    this.filterItems.push({
+    this.filters.push({
       criterion: null,
       operator: null,
       value: null,

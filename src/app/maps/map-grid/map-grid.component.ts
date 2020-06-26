@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FMap} from '../../faf-api/FMap';
+import {FafMap} from '../../faf-api/FafMap';
 import {faDownload, faGamepad, faRulerCombined, faUsers} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -9,7 +9,7 @@ import {faDownload, faGamepad, faRulerCombined, faUsers} from '@fortawesome/free
 })
 export class MapGridComponent implements OnInit {
   @Input()
-  public maps: FMap[];
+  public maps: FafMap[];
 
   faGamepad = faGamepad;
   faDownload = faDownload;
