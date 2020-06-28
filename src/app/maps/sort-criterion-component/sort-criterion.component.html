@@ -1,7 +1,7 @@
 <div class="ui-inputgroup">
   <span class="ui-inputgroup-addon"><i class="pi pi-sort-alpha-down"></i></span>
-  <p-dropdown [options]="sortCriteria" [(ngModel)]="criterion" (ngModelChange)="onUpdate()"
+  <p-dropdown [options]="availableSortCriteria" [(ngModel)]="sortSelection.criterion" (ngModelChange)="onUpdate()"
               optionLabel="nameKey" placeholder="Select a sort criterion"></p-dropdown>
-  <p-selectButton [options]="directions" [(ngModel)]="direction"
+  <p-selectButton [options]="directions" [(ngModel)]="sortSelection.direction"
                   (change)="onUpdate()"></p-selectButton>
 </div>

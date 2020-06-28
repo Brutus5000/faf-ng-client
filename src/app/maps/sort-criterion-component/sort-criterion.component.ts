@@ -1,6 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SortCriterion, SortOrder, SortSelection} from '../../faf-api/sort-criterion';
-import {MapSortCriteria} from '../../faf-api/map.service';
 import {SelectItem} from 'primeng/api';
 
 @Component({
@@ -9,15 +8,25 @@ import {SelectItem} from 'primeng/api';
   styleUrls: ['./sort-criterion.component.scss']
 })
 export class SortCriterionComponent implements OnInit {
-  SortOrder = SortOrder;
+  directions: SelectItem[] = [
+    {
+      label: 'DESC',
+      value: SortOrder.DESCENDING
+    },
+    {
+      label: 'ASC',
+      value: SortOrder.ASCENDING
+    }
+  ];
+
+  @Input()
+  availableSortCriteria: SortCriterion[];
+
+  @Input()
+  sortSelection: SortSelection;
 
   @Output()
   sortSelectionChange = new EventEmitter<SortSelection>();
-
-  sortCriteria: SortCriterion[] = MapSortCriteria.ALL;
-
-  criterion: SortCriterion = MapSortCriteria.DOWNLOADS;
-  direction = SortOrder.DESCENDING;
 
   constructor() {
   }
@@ -27,10 +36,9 @@ export class SortCriterionComponent implements OnInit {
   }
 
   onUpdate(): void {
-    this.sortSelectionChange.emit({
-      criterion: this.criterion,
-      direction: this.direction
-    });
+    if (this.sortSelection && this.sortSelection.criterion && this.sortSelection.direction) {
+      this.sortSelectionChange.emit(this.sortSelection);
+    }
   }
 
 }

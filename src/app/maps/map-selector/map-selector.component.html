@@ -1,9 +1,13 @@
-<faf-filter-criterion *ngFor="let filter of filters; let i = index"
-                      [index]="i"
-                      (expressionChange)="onFilterChange(i, $event)"
-                      (remove)="onRemove(i)">
-</faf-filter-criterion>
-<faf-sort-criterion-component (sortSelectionChange)="onSortingChange($event)"></faf-sort-criterion-component>
+<div *ngFor="let f of filters; let i = index">
+  <faf-filter-criterion
+    [(filter)]="filters[i]"
+    [availableCriteria]="availableFilterCriteria"
+    (remove)="onRemove(i)">
+  </faf-filter-criterion>
+</div>
+<faf-sort-criterion-component
+  [availableSortCriteria]="availableSortCriteria"
+  [(sortSelection)]="sorting"></faf-sort-criterion-component>
 
 <p *ngIf="showQuery">
   <input type="text" pInputText disabled [(ngModel)]="queryString"

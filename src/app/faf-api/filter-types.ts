@@ -1,5 +1,4 @@
 import {QueryCondition} from './query-condition';
-import {SortOrder} from './sort-criterion';
 
 export interface FilterCriterion {
   nameKey: string;
@@ -18,10 +17,19 @@ export interface FilterSelection {
 export function buildFilterExpression(selection: FilterSelection | FilterSelection[]): string {
   const list = [].concat(selection);
 
-  return list
+  let expression = list
+    .filter(it => it != null && it.criterion != null && it.operator != null && it.value != null)
     .map(it => it.operator.buildFilterExpression(it.criterion.apiField, it.value))
     // semicolon is AND operator in RSql
     .join(';');
+
+  if (expression.length === 0) {
+    expression = null;
+  }
+
+  console.log('Created filter expression: ' + expression);
+
+  return expression;
 }
 
 

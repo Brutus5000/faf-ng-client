@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {DatastoreService} from '../datastore.service';
 import {FafMap} from './FafMap';
-import {buildFilterExpression, FilterSelection} from './filter-criterion';
+import {buildFilterExpression, FilterSelection} from './filter-types';
 import {buildSortExpression, SortSelection} from './sort-criterion';
 import {Observable} from 'rxjs';
 import {JsonApiQueryData} from 'angular2-jsonapi/models/json-api-query-data';
-import {BooleanCondition, Contains, Is, NumberConditions, StringConditions} from "./query-condition";
+import {BooleanCondition, Contains, Is, NumberConditions, StringConditions} from './query-condition';
 
 
 export class MapFilterCriteria {
@@ -100,15 +100,28 @@ export class MapService {
                pageSize: number,
                currentPage: number,
                showHidden: boolean = false): Observable<JsonApiQueryData<FafMap>> {
+    console.log('Query maps');
+
     if (showHidden) {
       filters = [MapService.HIDDEN_SELECTION].concat(filters);
     }
 
-    return this.datastore.findAll(FafMap, {
+    const filterExpression = buildFilterExpression(filters);
+    const sortExpression = buildSortExpression(sorting);
+
+    const params: any = {
       page: {size: pageSize, number: currentPage, totals: ''},
       include,
-      filter: buildFilterExpression(filters),
-      sort: buildSortExpression(sorting),
-    });
+    };
+
+    if (filterExpression) {
+      params.filter = filterExpression;
+    }
+
+    if (sortExpression) {
+      params.sort = sortExpression;
+    }
+
+    return this.datastore.findAll(FafMap, params);
   }
 }

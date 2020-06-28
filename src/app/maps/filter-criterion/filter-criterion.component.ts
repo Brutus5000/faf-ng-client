@@ -1,12 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Contains, Is, NumberConditions, QueryCondition, StringConditions} from '../../faf-api/query-condition';
-import {FilterCriterion} from '../../faf-api/filter-criterion';
-
-export interface MapFilter {
-  criterion: FilterCriterion;
-  operator: QueryCondition;
-  value: string;
-}
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {FilterCriterion, FilterSelection} from '../../faf-api/filter-types';
+import {SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'faf-filter-criterion',
@@ -15,29 +9,27 @@ export interface MapFilter {
 })
 export class FilterCriterionComponent {
   @Input()
-  availableCriteria: FilterTypes[];
+  availableCriteria: FilterCriterion[];
   @Input()
-  index: number;
+  filter: FilterSelection;
   @Output()
-  expressionChange = new EventEmitter<string>();
+  filterChange = new EventEmitter<FilterSelection>();
+
+  @Output()
+  expressionChange = new EventEmitter<FilterSelection>();
   @Output()
   remove = new EventEmitter();
 
-  selectedCriterion?: FilterCriterion;
-  selectedOperator?: QueryCondition;
-  value?: string;
   active = true;
 
   onUpdate(): void {
-    this.expressionChange.emit({
-      criterion: this.selectedCriterion,
-      operator: this.selectedOperator,
-      value: this.value
-    });
+    if (this.filter && this.filter.criterion && this.filter.operator && this.filter.value) {
+      this.filterChange.emit(this.filter);
+    }
   }
 
   getAvailableOperators() {
-    return this.selectedCriterion?.operators;
+    return this.filter?.criterion?.operators;
   }
 
   private toSelectItem(v: string): SelectItem {
@@ -48,11 +40,11 @@ export class FilterCriterionComponent {
   }
 
   getAvailableValues(): SelectItem[] {
-    return (this.selectedCriterion?.availableValues ?? []).map(this.toSelectItem);
+    return (this.filter?.criterion?.availableValues ?? []).map(this.toSelectItem);
   }
 
   onSelectedCriterion() {
-    this.selectedOperator = this.selectedCriterion.defaultOperator;
+    this.filter.operator = this.filter.criterion.defaultOperator;
     this.onUpdate();
   }
 

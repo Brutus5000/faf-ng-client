@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, EventEmitter, Output} from '@angular/core';
-import {FilterCriterionComponent} from '../filter-criterion/filter-criterion.component';
-import {buildSortExpression, SortSelection} from '../../faf-api/sort-criterion';
-import {FilterSelection} from '../../faf-api/filter-criterion';
+import {SortCriterion, SortOrder, SortSelection} from '../../faf-api/sort-criterion';
+import {buildFilterExpression, FilterCriterion, FilterSelection} from '../../faf-api/filter-types';
+import {MapFilterCriteria, MapSortCriteria} from '../../faf-api/map.service';
 
 @Component({
   selector: 'faf-map-selector',
@@ -9,8 +9,20 @@ import {FilterSelection} from '../../faf-api/filter-criterion';
   styleUrls: ['./map-selector.component.scss']
 })
 export class MapSelectorComponent implements AfterViewInit {
+  availableFilterCriteria: FilterCriterion[] = [
+    MapFilterCriteria.NAME,
+    MapFilterCriteria.MAX_PLAYERS,
+    MapFilterCriteria.WIDTH,
+    MapFilterCriteria.HEIGHT,
+  ];
+
+  availableSortCriteria: SortCriterion[] = MapSortCriteria.ALL;
+
   filters: FilterSelection[] = [];
-  sortingString = null;
+  sorting: SortSelection = {
+    criterion: MapSortCriteria.DOWNLOADS,
+    direction: SortOrder.DESCENDING
+  };
   showQuery = false;
   queryString: string = null;
 
@@ -21,20 +33,8 @@ export class MapSelectorComponent implements AfterViewInit {
   }
 
   onSearch() {
-    const elideFilter = 'latestVersion.hidden==false'
-      + this.filterItems
-        .map(item => {
-          if (item.criterion && item.operator && item.value) {
-            return item.operator.buildFilterExpression(item.criterion.apiField, item.value);
-          } else {
-            return '';
-          }
-        })
-        .filter(filterString => filterString.length > 0)
-        .map(filterString => ';' + filterString)
-        .join('');
-    this.queryString = elideFilter;
-    this.search.emit({filter: elideFilter, sorting: this.sortingString});
+    this.queryString = buildFilterExpression(this.filters);
+    this.search.emit({filter: this.filters, sorting: this.sorting});
   }
 
   ngAfterViewInit(): void {
@@ -42,24 +42,11 @@ export class MapSelectorComponent implements AfterViewInit {
     this.onSearch();
   }
 
-  onFilterChange(index: number, filterItem: FilterSelection) {
-    this.filterItems[index] = filterItem;
-  }
-
-  onSortingChange(sortSelection: SortSelection) {
-    this.sortingString = buildSortExpression(sortSelection);
-  }
-
   onRemove(index: number) {
     this.filters.splice(index, 1);
   }
 
   addCriterion() {
-    this.filters.push({
-      criterion: null,
-      operator: null,
-      value: null,
-    });
     this.filters.push({
       criterion: null,
       operator: null,

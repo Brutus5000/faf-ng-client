@@ -1,11 +1,11 @@
 <div class="ui-inputgroup">
   <span class="ui-inputgroup-addon"><i class="pi pi-filter"></i></span>
-  <p-dropdown [options]="availableCriteria" [(ngModel)]="selectedCriterion" (ngModelChange)="onSelectedCriterion()"
+  <p-dropdown [options]="availableCriteria" [(ngModel)]="filter.criterion" (ngModelChange)="onSelectedCriterion()"
               optionLabel="nameKey" placeholder="Select a criterion"></p-dropdown>
-  <p-dropdown [options]="getAvailableOperators()" [(ngModel)]="selectedOperator" (ngModelChange)="onUpdate()"
+  <p-dropdown [options]="getAvailableOperators()" [(ngModel)]="filter.operator" (ngModelChange)="onUpdate()"
               optionLabel="nameKey" placeholder="Select an operator"></p-dropdown>
-  <p-dropdown [options]="getAvailableValues()" [(ngModel)]="value" (ngModelChange)="onUpdate()"
+  <p-dropdown [options]="getAvailableValues()" [(ngModel)]="filter.value" (ngModelChange)="onUpdate()"
               placeholder="Your search value" [editable]="getAvailableValues().length == 0"></p-dropdown>
-  <p-checkbox [(ngModel)]="active" (ngModelChange)="onUpdate()"></p-checkbox>
+  <!--  <p-checkbox [(ngModel)]="active" (ngModelChange)="onUpdate()"></p-checkbox>-->
   <button pButton class="ui-button-warning" icon="pi pi-trash" (click)="onRemove()"></button>
 </div>
